@@ -24,11 +24,7 @@ client = openai_api.Client.new(api_token)
 output = subprocess.run(["git", "diff", "HEAD"], stdout=subprocess.PIPE)
 output = output.stdout.decode("utf-8")
 
-prompt_args = openai_api.api.CompletionArgs.builder().prompt(f"git diff HEAD\n{output}\n\n# Write a commit message describing the changes and the reasoning behind them\ngit commit -F- <<EOF")
-  .engine("code-davinci-002")
-  .temperature(0.0)
-  .max_tokens(2000)
-  .stop(["EOF"])
+prompt_args = openai_api.api.CompletionArgs.builder().prompt(f"git diff HEAD\n{output}\n\n# Write a commit message describing the changes and the reasoning behind them\ngit commit -F- <<EOF").engine("code-davinci-002").temperature(0.0).max_tokens(2000).stop(["EOF"])
 
 prompt_response = client.completions.create(prompt_args.build())
 
