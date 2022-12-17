@@ -22,8 +22,6 @@ if is_repo != "true":
 output = subprocess.run(["git", "diff", "HEAD"], stdout=subprocess.PIPE)
 output = output.stdout.decode("utf-8")
 
-# prompt_args = openai.CompletionArgs.builder().prompt(f"git diff HEAD\n{output}\n\n# Write a commit message describing the changes and the reasoning behind them\ngit commit -F- <<EOF").engine("code-davinci-002").temperature(0.0).max_tokens(2000).stop(["EOF"])
-
 prompt_response = openai.Completion.create(
     model="text-davinci-002",
     prompt=f"git diff HEAD\n{output}\n\n# Please generate a commit message describing the changes",
@@ -31,9 +29,7 @@ prompt_response = openai.Completion.create(
     temperature=0.5
 )
 commit_messages = prompt_response.choices[0]["text"]
-# print(commit_messages)
-# commit_message = prompt_response.get_completions()[0]["text"].strip()
 
-subprocess.run(["git", "commit", "-m"], input=commit_messages.encode("utf-8"))
+# subprocess.run(["git", "commit", "-m", commit_messages], input=commit_messages.encode("utf-8"))
 
 print(f"Commit message generated: {commit_messages}")
