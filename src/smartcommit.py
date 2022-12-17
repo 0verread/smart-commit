@@ -26,7 +26,7 @@ output = output.stdout.decode("utf-8")
 
 prompt_response = openai.Completion.create(
     model="text-davinci-002",
-    prompt=f"git diff HEAD\n{output}\n\n# Please generate a commit message describing the changes\ngit commit -F- <<EOF",
+    prompt=f"git diff HEAD\n{output}\n\n# Please generate a commit message describing the changes",
     max_tokens=1024,
     temperature=0.5
 )
