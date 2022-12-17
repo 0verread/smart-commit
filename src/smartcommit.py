@@ -34,6 +34,6 @@ commit_messages = prompt_response.choices[0]["text"]
 # print(commit_messages)
 # commit_message = prompt_response.get_completions()[0]["text"].strip()
 
-subprocess.run(["git", "commit", "-m", "<<EOF"], input=commit_messages.encode("utf-8"))
+subprocess.run(["git", "commit", "-m"], input=commit_messages.encode("utf-8"))
 
 print(f"Commit message generated: {commit_messages}")
