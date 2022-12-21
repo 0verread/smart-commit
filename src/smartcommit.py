@@ -3,9 +3,14 @@ import os
 import subprocess
 
 openai.api_key = os.environ.get("OPENAI_API_KEY")
-if openai.api_key is None:
-  print("Please set the OPENAI_API_KEY environment variable.")
-  
+
+def check_api_key():
+  openai.api_key = os.environ.get("OPENAI_API_KEY")
+  if openai.api_key is None:
+    print("Please set the OPENAI_API_KEY environment variable.")
+    return
+
+check_api_key()
 
 git_staged_cmd = subprocess.run(["git", "diff", "--staged"], stdout=subprocess.PIPE)
 git_staged_cmd = git_staged_cmd.stdout.decode("utf-8")
@@ -33,3 +38,9 @@ commit_messages = prompt_response.choices[0]["text"]
 # subprocess.run(["git", "commit", "-m", commit_messages], input=commit_messages.encode("utf-8"))
 
 print(f"Commit message generated: {commit_messages}")
+
+# generate_git_commit():
+
+
+# # if __name__ = "__main__":
+# #   generate_git_commit
