@@ -35,7 +35,7 @@ prompt_response = openai.Completion.create(
 )
 commit_messages = prompt_response.choices[0]["text"]
 
-# subprocess.run(["git", "commit", "-m", commit_messages], input=commit_messages.encode("utf-8"))
+subprocess.run(["git", "commit", "-m", commit_messages], input=commit_messages.encode("utf-8"))
 
 print(f"Commit message generated: {commit_messages}")
 
