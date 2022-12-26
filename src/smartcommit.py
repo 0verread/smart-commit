@@ -1,9 +1,5 @@
 #!/usr/bin/env python
 
-# pyInquirer
-# Typer/click
-# curses
-
 import openai
 import os
 import subprocess
@@ -31,7 +27,7 @@ def check_api_key():
   openai.api_key = os.environ.get("OPENAI_API_KEY")
   if openai.api_key is None:
     print("Please set the OPENAI_API_KEY environment variable.")
-    return
+    return None
   return openai.api_key
 
 def get_commit_msg():
@@ -40,9 +36,7 @@ def get_commit_msg():
   if len(git_staged_cmd) == 0:
     print("There are no staged files to commit.\nTry running git add to stage some files.")
     return
-  is_repo = subprocess.run(["git", "rev-parse", "--is-inside-work-tree"], stdout=subprocess.PIPE)
-  is_repo = is_repo.stdout.decode("utf-8").strip()
-
+  is_repo = subprocess.run(["git", "rev-parse", "--is-inside-work-tree"], stdout=subprocess.PIPE).stdout.decode("utf-8").strip()
   if is_repo != "true":
     print("It looks like you are not in a git repository.\nMake sure you are in a git repository.")
     return
@@ -58,22 +52,27 @@ def get_commit_msg():
   return commit_messages
 
 def commit_changes():
-  check_api_key()
+  if(check_api_key() is None):
+    return None
   commit_msg = get_commit_msg()
   return commit_msg
 
   # subprocess.run(["git", "commit", "-m", commit_msg], input=commit_msg.encode("utf-8"))
 
 def main():
+  commit_msg  = commit_changes()
+  if(commit_msg is None):
+      return
+  
   with Progress(
     SpinnerColumn(),
     TextColumn("[progress.description]{task.description}"),
   ) as progress:
     task = progress.add_task(description="Generating Commit message...", total=None)
-    commit_msg  = commit_changes()
     if is_commitmsg_ready:
       progress.update(task, advance=1)
   ans  = prompt(prompt_questions)
+
   print(f"Commit message generated: {commit_msg}")
   print("Done!")
 
