@@ -1,14 +1,15 @@
 #!/usr/bin/env python
 
-import openai
 import os
+import openai
 import subprocess
 
 import typer
 from rich.progress import Progress, SpinnerColumn, TextColumn
-from InquirerPy import prompt
+from InquirerPy import prompt, inquirer
 
 is_commitmsg_ready = False
+commit_msg = ""
 
 prompt_questions = [
   {
@@ -71,11 +72,23 @@ def main():
     task = progress.add_task(description="Generating Commit message...", total=None)
     if is_commitmsg_ready:
       progress.update(task, advance=1)
-  ans  = prompt(prompt_questions)
-
-  print(f"Commit message generated: {commit_msg}")
+  action  = inquirer.select(
+    message="Commit message is ready. what do you want to do?",
+    choices=[
+      'Commit',
+      'See Commit message',
+      'Edit Commit Message' 
+    ],
+    default=None
+  ).execute()
+  if action == "See Commit message":
+    ans  = prompt(prompt_questions)
+    print(f"Commit message generated: {commit_msg}")
+  elif action == "Edit Commit Message":
+    
   print("Done!")
 
 
 if __name__ == "__main__":
   main()
+
