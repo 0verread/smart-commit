@@ -10,6 +10,19 @@ from InquirerPy import prompt, inquirer
 
 is_commitmsg_ready = False
 commit_msg = ""
+"""
+Working Flow -
+
+Generate Commit messgage
+        |
+      > Commit with generated message
+      > Commit with manually entered message
+        |
+      if Commit with manually entered message then
+        Enter Commit message
+        |
+        Commit
+"""
 
 prompt_questions = [
   {
@@ -58,36 +71,33 @@ def commit_changes():
   commit_msg = get_commit_msg()
   return commit_msg
 
-  # subprocess.run(["git", "commit", "-m", commit_msg], input=commit_msg.encode("utf-8"))
-
-def main():
-  commit_msg  = commit_changes()
-  if(commit_msg is None):
-      return
-  
+def main():  
   with Progress(
     SpinnerColumn(),
     TextColumn("[progress.description]{task.description}"),
   ) as progress:
     task = progress.add_task(description="Generating Commit message...", total=None)
+    commit_msg  = commit_changes()
+    if(commit_msg is None):
+      return
     if is_commitmsg_ready:
       progress.update(task, advance=1)
+  print(f"Commit message generated: {commit_msg}")
   action  = inquirer.select(
-    message="Commit message is ready. what do you want to do?",
+    message="Do you want to",
     choices=[
-      'Commit',
-      'See Commit message',
-      'Edit Commit Message' 
+      'Commit with AI generated message',
+      'Commit with manually entered message',
     ],
     default=None
   ).execute()
-  if action == "See Commit message":
-    ans  = prompt(prompt_questions)
-    print(f"Commit message generated: {commit_msg}")
-  elif action == "Edit Commit Message":
-    
-  print("Done!")
-
+  if action == "Commit with AI generated message":
+    print("In AI message generated", commit_msg)
+  elif action == "Commit with manually entered message":
+    commit_msg = inquirer.text(message="Enter your git commit:").execute()
+    print(commit_msg)
+    print("Done!")
+# subprocess.run(["git", "commit", "-m", commit_msg], input=commit_msg.encode("utf-8"))
 
 if __name__ == "__main__":
   main()
