@@ -1,41 +1,12 @@
-#!/usr/bin/env python
-
 import os
 import openai
 import subprocess
 
-import typer
 from rich.progress import Progress, SpinnerColumn, TextColumn
 from InquirerPy import prompt, inquirer
 
 is_commitmsg_ready = False
 commit_msg = ""
-"""
-Working Flow -
-
-Generate Commit messgage
-        |
-      > Commit with generated message
-      > Commit with manually entered message
-        |
-      if Commit with manually entered message then
-        Enter Commit message
-        |
-        Commit
-"""
-
-prompt_questions = [
-  {
-    'type': 'list',
-    'name': 'options',
-    'message': 'Commit message is ready. what do you want to do?',
-    'choices': [
-      'Commit',
-      'See Commit message',
-      'Edit Commit Message'
-    ]
-  }
-]
 
 def check_api_key():
   openai.api_key = os.environ.get("OPENAI_API_KEY")
@@ -48,36 +19,32 @@ def get_commit_msg():
   git_staged_cmd = subprocess.run(["git", "diff", "--staged"], stdout=subprocess.PIPE).stdout.decode("utf-8")
 
   if len(git_staged_cmd) == 0:
-    print("There are no staged files to commit.\nTry running git add to stage some files.")
+    print("No stage files to commit. Run git add to stage some files.")
     return
   is_repo = subprocess.run(["git", "rev-parse", "--is-inside-work-tree"], stdout=subprocess.PIPE).stdout.decode("utf-8").strip()
   if is_repo != "true":
-    print("It looks like you are not in a git repository.\nMake sure you are in a git repository.")
+    print("you are not in a git repository.Move to a git repository.")
     return
   output = subprocess.run(["git", "diff", "HEAD"], stdout=subprocess.PIPE).stdout.decode("utf-8")
   prompt_response = openai.Completion.create(
-    model="text-davinci-002",
-    prompt=f"git diff HEAD\n{output}\n\n#Write a one line git commit message that describes the changes",
-    max_tokens=1024,
-    temperature=0.5
+    model="code-davinci-002",
+    prompt=f"{output}\n\n#Write a one-line commit message describing the changes",
+    max_tokens=2000,
+    temperature=0.0
   )
-  commit_messages = prompt_response.choices[0]["text"] 
+  commit_messages = prompt_response.choices[0]["text"]
   is_commitmsg_ready=True
   return commit_messages
 
-def commit_changes():
-  if(check_api_key() is None):
+def main():
+  if check_api_key() is None:
     return None
-  commit_msg = get_commit_msg()
-  return commit_msg
-
-def main():  
   with Progress(
     SpinnerColumn(),
     TextColumn("[progress.description]{task.description}"),
   ) as progress:
     task = progress.add_task(description="Generating Commit message...", total=None)
-    commit_msg  = commit_changes()
+    commit_msg  = get_commit_msg()
     if(commit_msg is None):
       return
     if is_commitmsg_ready:
@@ -94,7 +61,7 @@ def main():
   if action == "Commit with AI generated message":
     print("In AI message generated", commit_msg)
   elif action == "Commit with manually entered message":
-    commit_msg = inquirer.text(message="Enter your git commit:").execute()
+    commit_msg = inquirer.text(message="Enter your commit message:").execute()
     print(commit_msg)
     print("Done!")
 # subprocess.run(["git", "commit", "-m", commit_msg], input=commit_msg.encode("utf-8"))
