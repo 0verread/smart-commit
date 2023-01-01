@@ -1,10 +1,10 @@
 from setuptools import setup, find_packages
 
 setup(
-    name="smart_commits",
+    name="smartcommit",
     author="Amir M. Ghanem",
     author_email="amirghanem95@gmail.com",
-    version='0.0.2',
+    version='0.0.1',
     description="A python CLI tool to generate git commit messages using OpenAI",
     url="https://github.com/0verread/smart-commit",
     packages=find_packages(),

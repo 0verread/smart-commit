@@ -1,0 +1,6 @@
+Click
+inquirer
+openai
+rich
+subprocess
+os
