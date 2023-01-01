@@ -2,3 +2,6 @@ venv
 .DS_Store
 # Environment variables
 .env
+
+.idea
+
