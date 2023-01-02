@@ -1,3 +1,4 @@
+
 # smart-commit
 A python CLI tool to generate git commit messages using [OpenAI](https://openai.com/blog/openai-codex/)
 
@@ -21,6 +22,10 @@ A python CLI tool to generate git commit messages using [OpenAI](https://openai.
   ```
   python smartcommit.py
   ```
+
+## Credit
+
+
 ## TODO
 
 - [ ] pip installer

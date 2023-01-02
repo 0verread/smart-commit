@@ -43,7 +43,7 @@ def main():
     SpinnerColumn(),
     TextColumn("[progress.description]{task.description}"),
   ) as progress:
-    task = progress.add_task(description="Generating Commit message...", total=None)
+    task = progress.add_task(description="Generating commit message...", total=None)
     commit_msg  = get_commit_msg()
     if(commit_msg is None):
       return
@@ -53,18 +53,18 @@ def main():
   action  = inquirer.select(
     message="Do you want to",
     choices=[
-      'Commit with AI generated message',
-      'Commit with manually entered message',
+      'Commit with AI generated message?',
+      'Commit with manually entered message?',
     ],
     default=None
   ).execute()
-  if action == "Commit with AI generated message":
-    print("In AI message generated", commit_msg)
-  elif action == "Commit with manually entered message":
+  if action == "Commit with AI generated message?":
+    print(f"AI generated commit message: ", commit_msg)
+  elif action == "Commit with manually entered message?":
     commit_msg = inquirer.text(message="Enter your commit message:").execute()
-    print(commit_msg)
-    print("Done!")
-# subprocess.run(["git", "commit", "-m", commit_msg], input=commit_msg.encode("utf-8"))
+    print(f"Commit message: ", commit_msg)
+  subprocess.run(["git", "commit", "-m", commit_msg], input=commit_msg.encode("utf-8"))
+  print("Commit operation is done!")
 
 if __name__ == "__main__":
   main()
