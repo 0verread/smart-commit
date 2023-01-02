@@ -24,9 +24,14 @@ A python CLI tool to generate git commit messages using [OpenAI](https://openai.
   ```
 
 ## Credit
-
+This project is inspired by [Miguel Piedrafita's](https://github.com/m1guelpf) project
+ [auto-commit](https://github.com/m1guelpf/auto-commit)
 
 ## TODO
 
 - [ ] pip installer
 - [ ] Error handling
+
+## License
+
+This project is released under [MIT License](LICENSE)
