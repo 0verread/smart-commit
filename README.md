@@ -30,6 +30,7 @@ This project is inspired by [Miguel Piedrafita's](https://github.com/m1guelpf) p
 ## TODO
 
 - [ ] pip installer
+- [ ] Support args
 - [ ] Error handling
 
 ## License
