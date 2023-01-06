@@ -1,0 +1,8 @@
+README.md
+setup.py
+smart_commits.egg-info/PKG-INFO
+smart_commits.egg-info/SOURCES.txt
+smart_commits.egg-info/dependency_links.txt
+smart_commits.egg-info/entry_points.txt
+smart_commits.egg-info/requires.txt
+smart_commits.egg-info/top_level.txt

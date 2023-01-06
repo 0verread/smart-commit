@@ -1,4 +1,6 @@
 import os
+
+import click
 import openai
 import subprocess
 
@@ -45,6 +47,10 @@ def get_commit_msg():
     is_commitmsg_ready=True
   return commit_messages
 
+
+
+@click.command
+@click.option("--message", "-m", help="Commit message",is_flag=True)
 def main():
   if check_api_key() is None:
     return None
