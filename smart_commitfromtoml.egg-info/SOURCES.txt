@@ -1,0 +1,11 @@
+LICENSE
+README.md
+pyproject.toml
+setup.cfg
+setup.py
+smart_commitfromtoml.egg-info/PKG-INFO
+smart_commitfromtoml.egg-info/SOURCES.txt
+smart_commitfromtoml.egg-info/dependency_links.txt
+smart_commitfromtoml.egg-info/entry_points.txt
+smart_commitfromtoml.egg-info/top_level.txt
+smartcommit/smartcommit.py

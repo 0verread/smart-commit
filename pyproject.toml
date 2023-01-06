@@ -1,12 +1,18 @@
 [project]
-author = "Subhajit Das"
-name = "smart-commit"
-url = "https://github.com/0verread/smart-commit"
+name = "smart-commitfromtoml"
 version = "1.0.0"
+description = "A CLI tool to generate git commit messages"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [{name = "Subhajit Das"}]
+
+[project.urls]
+repository = "https://github.com/0verread/smart-commit"
+
 
 [build-system]
 build-backend = "setuptools.build_meta"
 requires = ["setuptools", "wheel"]
 
 [project.scripts]
-scommit = "smart-commit.smartcommit:main"
+scommit = "smartcommit.smartcommit:main"
