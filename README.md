@@ -15,7 +15,7 @@ A python CLI tool to generate git commit messages using [OpenAI](https://openai.
 3. Install all dependencies
 
   ```
-  pip install requirements.txt
+  pip install -r requirements.txt
   ```
 4. Run smartcommit.py file
 
