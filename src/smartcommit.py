@@ -69,5 +69,6 @@ def main():
   print(f"Commit operation is done!")
 
 if __name__ == "__main__":
+  # This runs when you run "python3 src/smartcommit.py"
   main()
 
