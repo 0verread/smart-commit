@@ -2,7 +2,7 @@
 # smart-commit
 A python CLI tool to generate git commit messages using [OpenAI](https://openai.com/blog/openai-codex/)
 
-> This project is under development.
+> This project is under active development.
 
 ## How to use it
 
