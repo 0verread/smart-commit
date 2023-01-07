@@ -1,5 +1,5 @@
 [project]
-name = "smart-commitfromtoml"
+name = "smart-commit"
 version = "1.0.0"
 description = "A CLI tool to generate git commit messages"
 readme = "README.md"
