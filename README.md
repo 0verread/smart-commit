@@ -16,18 +16,10 @@ A python CLI tool to generate git commit messages using [OpenAI](https://openai.
   
 3. Now, you can install `smartcommit` using pip
 
-<<<<<<< HEAD
 ```
 pip install https://github.com/0verread/smart-commit/archive/refs/tags/v1.0.0.tar.gz
 ```
 4. Run `scommit`. Now you're good to go.
-=======
-  ```
-  pip install -r requirements.txt
-  ```
-4. Run smartcommit.py file
->>>>>>> f8431ffc54ba6f3ff5e982de88964113a89fedb8
-
 ## Usage
 
 Once you've set your `OPENAI_API_KEY` and installed smartcommit using pip, you can use it using `scommit` commnad.
