@@ -12,16 +12,18 @@ A python CLI tool to generate git commit messages using [OpenAI](https://openai.
   ```
     export OPENAI_API_KEY='sk-********'
   ```
-3. Install all dependencies
+  you can also save it in your bash profile, so it remains persistence.
+  
+3. Now, you can install `smartcommit` using pip
 
-  ```
-  pip install requirements.txt
-  ```
-4. Run smartcommit.py file
+```
+pip install https://github.com/0verread/smart-commit/archive/refs/tags/v1.0.0.tar.gz
+```
+4. Run `scommit`. Now you're good to go.
 
-  ```
-  python smartcommit.py
-  ```
+## Usage
+
+Once you've set your `OPENAI_API_KEY` and installed smartcommit using pip, you can use it using `scommit` commnad.
 
 ## Credit
 This project is inspired by [Miguel Piedrafita's](https://github.com/m1guelpf) project
@@ -29,7 +31,7 @@ This project is inspired by [Miguel Piedrafita's](https://github.com/m1guelpf) p
 
 ## TODO
 
-- [ ] pip installer
+- [x] pip installer
 - [ ] Support args
 - [ ] Error handling
 
